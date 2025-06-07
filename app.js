@@ -135,7 +135,6 @@ app.use((req, res, next) => {
     res.status(404).render('error/404', { title: 'Page Not Found' });
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).render('error/500', { title: 'Something Went Wrong' });
@@ -147,7 +146,6 @@ app.get('*', (req, res) => {
 });
 
 
-// Start server
 async function startServer() {
     try {
         await mongoose.connect(MONGO_URL); // ✅ cleaned up deprecated options
