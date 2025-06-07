@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Museum Ticket Booking</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      opacity: 0;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+      color: #e0e0ff;
+      opacity: 0;
+    }
+
+    .btn {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 111, 97, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      opacity: 0;
+    }
+
+    .btn:hover {
+      background: #ff4a3d;
+      box-shadow: 0 8px 24px rgba(255, 74, 61, 0.7);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Museum Ticket Booking</h1>
+    <p>
+      Explore the rich history, art, and culture by booking tickets to the finest museums in your city.
+      Seamless booking, instant confirmation, and a hassle-free experience await you!
+    </p>
+    <a href="/listings" class="btn">Visit Museums</a>
+  </div>
+
+  <footer>
+    &copy; <%= new Date().getFullYear() %> Museum Ticket Booking App
+  </footer>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      gsap.timeline()
+        .to(".container", { duration: 1, y: 0, opacity: 1, ease: "power3.out" })
+        .to("h1", { duration: 0.8, opacity: 1, y: -10 }, "-=0.6")
+        .to("p", { duration: 0.8, opacity: 1, y: -10 }, "-=0.5")
+        .to(".btn", { duration: 0.8, opacity: 1, scale: 1.05 }, "-=0.4");
+    });
+  </script>
+
+</body>
+</html>

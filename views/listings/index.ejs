@@ -172,7 +172,7 @@
         </div>
 
         <!-- Bot icon (medium size) -->
-        <div id="bot-icon" onclick="toggleBot()">💬</div>
+        <!-- <div id="bot-icon" onclick="toggleBot()">💬</div> -->
 
         <!-- Bot iframe container -->
         <div id="bot-container">
@@ -180,68 +180,68 @@
             <iframe height="430" width="350" src="https://bot.dialogflow.com/e497957d-1eba-4467-8ee5-027547e162a4"></iframe>
         </div>
 
-        <script>
-            function loadingpage() {
-                let tl = gsap.timeline();
+       <script>
+    function loadingpage() {
+        // Check if animation has already played in this session
+        if (sessionStorage.getItem('animationPlayed')) {
+            document.querySelector("#splashScreen").style.display = "none";
+            document.querySelector("#mainContent").style.display = "block";
+            document.body.style.overflow = "auto";
+            return; // Exit the function if animation already played
+        }
 
-                document.addEventListener("DOMContentLoaded", function () {
-                    const loaderCount = document.querySelector(".loaderPage #count");
+        let tl = gsap.timeline();
 
-                    tl.from(".loaderPage .text-container .text", {
-                        y: 100,
-                        duration: 0.8,
-                        stagger: 0.2,
-                    });
+        document.addEventListener("DOMContentLoaded", function () {
+            const loaderCount = document.querySelector(".loaderPage #count");
 
-                    tl.to(
-                        {},
-                        {
-                            delay: 0.8,
-                            duration: 0.4,
-                            ease: "none",
-                            onUpdate: function () {
-                                const progress = Math.round(this.progress() * 10) * 10;
-                                loaderCount.textContent = `${progress}%`;
-                            },
-                            onComplete: function () {
-                                loaderCount.textContent = "100%";
-                                document.querySelector(".loaderPage .wrapper").style.borderRadius = "10px";
+            tl.from(".loaderPage .text-container .text", {
+                y: 100,
+                duration: 0.8,
+                stagger: 0.2,
+            });
 
-                                tl.to(".loaderPage .wrapper", {
-                                    onStart: () => {
-                                        gsap.to(".loaderPage .text-container .text", {
-                                            y: -120,
-                                            duration: 0.7,
-                                            stagger: 0.1,
-                                        });
-                                    },
-                                    top: "70%",
-                                    duration: 1.3,
-                                    height: "0",
-                                    ease: "power3.in",
-                                    width: "85vw",
-                                    onComplete: () => {
-                                        document.querySelector("#splashScreen").style.display = "none";
-                                        document.querySelector("#mainContent").style.display = "block"; // Show main content
-                                        document.body.style.overflow = "auto"; // Re-enable scrolling
-                                    },
+            tl.to(
+                {},
+                {
+                    delay: 0.8,
+                    duration: 0.4,
+                    ease: "none",
+                    onUpdate: function () {
+                        const progress = Math.round(this.progress() * 10) * 10;
+                        loaderCount.textContent = `${progress}%`;
+                    },
+                    onComplete: function () {
+                        loaderCount.textContent = "100%";
+                        document.querySelector(".loaderPage .wrapper").style.borderRadius = "10px";
+
+                        tl.to(".loaderPage .wrapper", {
+                            onStart: () => {
+                                gsap.to(".loaderPage .text-container .text", {
+                                    y: -120,
+                                    duration: 0.7,
+                                    stagger: 0.1,
                                 });
                             },
-                        }
-                    );
-                });
-            }
-            loadingpage();
-
-            // Toggle the bot visibility
-            function toggleBot() {
-                const botContainer = document.getElementById('bot-container');
-                if (botContainer.style.display === 'none') {
-                    botContainer.style.display = 'block'; // Show bot
-                } else {
-                    botContainer.style.display = 'none'; // Hide bot
+                            top: "70%",
+                            duration: 1.3,
+                            height: "0",
+                            ease: "power3.in",
+                            width: "85vw",
+                            onComplete: () => {
+                                document.querySelector("#splashScreen").style.display = "none";
+                                document.querySelector("#mainContent").style.display = "block";
+                                document.body.style.overflow = "auto";
+                                // Mark animation as played for this session
+                                sessionStorage.setItem('animationPlayed', 'true');
+                            },
+                        });
+                    },
                 }
-            }
-        </script>
+            );
+        });
+    }
+    loadingpage();
+</script>
     </body>
     </html>
