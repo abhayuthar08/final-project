@@ -1,6 +1,11 @@
 // Require necessary packages
 require('dotenv').config();
 
+process.env.DEBUG = 'mongoose:*';
+
+// Mongoose configuration
+// mongoose.set('strictQuery', false);
+
 
 const express = require('express');
 const mongoose = require('mongoose');
